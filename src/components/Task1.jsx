@@ -3,13 +3,15 @@ import '../App.css';  // Import the CSS
 
 const Task1 = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false); // Toggle for enabling/disabling button
   const [textValue, setTextValue] = useState('');
   const [sumResult, setSumResult] = useState(0);
   const [dynamicChildren, setDynamicChildren] = useState([]);
+  const [num1, setNum1] = useState('');  
+  const [num2, setNum2] = useState('');
 
-  const handleSum = (num1, num2) => {
-    setSumResult(Number(num1) + Number(num2));
+  const handleSum = () => {
+    setSumResult(Number(num1) + Number(num2));  // Calculate the sum
   };
 
   return (
@@ -20,7 +22,7 @@ const Task1 = () => {
 
       <div className="task-section">
         <h2>Simple JSX</h2>
-        
+        <p>This is an example of simple JSX content being rendered on the screen.</p>
       </div>
 
       <div className="task-section">
@@ -69,11 +71,33 @@ const Task1 = () => {
 
       <div className="task-section">
         <h2>Sum of Two Numbers</h2>
-        <input type="number" placeholder="Number 1" id="num1" />
-        <input type="number" placeholder="Number 2" id="num2" />
-        <button onClick={() => handleSum(document.getElementById('num1').value, document.getElementById('num2').value)}>
+        <input 
+          type="number" 
+          placeholder="Number 1" 
+          value={num1} 
+          onChange={(e) => setNum1(e.target.value)} 
+        />
+        <input 
+          type="number" 
+          placeholder="Number 2" 
+          value={num2} 
+          onChange={(e) => setNum2(e.target.value)} 
+        />
+        
+        {/* Manually Enable/Disable the Calculate Button */}
+        <button 
+          onClick={handleSum} 
+          disabled={isDisabled}
+        >
           Calculate Sum
         </button>
+
+        <button 
+          onClick={() => setIsDisabled(!isDisabled)}
+        >
+          {isDisabled ? 'Enable' : 'Disable'} Calculate Button
+        </button>
+
         <p>Sum: {sumResult}</p>
       </div>
     </div>
